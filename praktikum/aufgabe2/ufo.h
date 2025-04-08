@@ -2,4 +2,4 @@
 
 class Ufo : Vertical {
 
-}
+};
