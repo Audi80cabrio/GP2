@@ -3,12 +3,12 @@
 #include <string>
 #include <vector>
 
-class Ufo {
+class Ufo {         //sollte abstract sein
 private:
     std::string id;
-    Ufosim* sim;
 
 public:
+    Ufosim* sim;
     Ufo(const std::string& pId);
     virtual ~Ufo();
 
