@@ -26,7 +26,7 @@ float Ufo::getFtime() const {
     return sim->getFtime();
 }
 
-std::vector<float> Ufo::wayPoint(const float x1, const float y1, const float x2, const float y2, const float h, const float phi){
+std::vector<float> Ufo::wayPoint(const float x1, const float y1, const float x2, const float y2, const float h, const float phi) {
     const float dx = x2 - x1;
     const float dy = y2 - y1;
     const float len = std::sqrt(dx * dx + dy * dy);

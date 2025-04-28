@@ -11,7 +11,7 @@ Vertical::Vertical(const std::string& pId) : Ufo(pId) {
 
 Vertical::~Vertical() {}
 
-void Vertical::flyToDest(const float x, const float y, const float height, const int speed) const{
+void Vertical::flyToDest(const float x, const float y, const float height, const int speed) {
     sim->flyTo(sim->getX(), sim->getY(), height, speed, 0);
     sim->flyTo(x, y, height, speed, 0);
     sim->flyTo(x, y, 0.0f, speed, 0);
