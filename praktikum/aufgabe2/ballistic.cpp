@@ -28,12 +28,12 @@ float Ballistic::getLandingAngle() const {
 
 std::vector<float> Ballistic::firstWaypoint(const float x, const float y, const float height) const {
     const auto pos = getPosition();
-    return wayPoint(pos[0], pos[1], x, y, height, takeOffAngle);
+    return wayPoint(pos[0], pos[1], x, y, height, takeOffAngle);        //wayPoint in ufo.cpp
 }
 
 std::vector<float> Ballistic::secondWaypoint(const float x, const float y, const float height) const {
     const auto pos = getPosition();
-    return wayPoint(x, y, pos[0], pos[1], height, landingAngle);
+    return wayPoint(x, y, pos[0], pos[1], height, landingAngle);        //wayPoint in ufo.cpp
 }
 
 void Ballistic::flyToDest(const float x, const float y, const float height, const int speed) const {
