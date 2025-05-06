@@ -17,9 +17,8 @@ void Vertical::flyToDest(const float x, const float y, const float height, const
     sim->flyTo(x, y, 0.0f, speed, 0);
 }
 
-static float distance(const float x1, const float y1, const float x2, const float y2, const float h){
+float distance(const float x1, const float y1, const float x2, const float y2, const float h){
     float dx = x2 - x1;
     float dy = y2 - y1;
-    float horizontal = std::sqrt(dx * dx + dy * dy);
-    return 2.0f * h + horizontal;
+    return 2.0f * h + std::sqrt(dx * dx + dy * dy);     //2 mal höhe plus entfernung(pythagoras)
 }

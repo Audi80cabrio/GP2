@@ -15,14 +15,14 @@ class Route {
 
 
         //---Getters---
-        std::vector<std::pair<float, float>>& getDestinations();    // Zielkoordinaten getterrrr
+        const std::vector<std::pair<float, float>>& getDestinations() const;    // Zielkoordinaten getterrrr
         float getHeight() const;        // Flughöhe getter
 
         //---Setters---
-        void setHeight(float pHeight);        // Flughöhe setttterrrr
-        void setDist(std::function<float(float, float, float, float, float)> pDist);// Distanzfunktion setterr
+        void setHeight(const float pHeight);        // Flughöhe setttterrrr
+        void setDist(const std::function<float(const float, const float, const float, const float, const float)> pDist);// Distanzfunktion setterr
 
         void add(float destX, float destY);     // Zielkoordinaten hinzufügen
         float distance() const;
-        Route shortestRoute() const; // Kürzeste Route (alle Permutationen prüfen)
+        Route shortestRoute() const; // Kürzeste Route
 };
