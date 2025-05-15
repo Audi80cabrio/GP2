@@ -6,20 +6,29 @@
 UfoThread::UfoThread(Ufo* pUfo) : ufo(pUfo) {}
 
 UfoThread::~UfoThread() {
-    if (flyThread && flyThread->joinable()) {
-        flyThread->join();
+    if (flyThread) {
+        if (flyThread->joinable()) {
+            flyThread->join();
+        }
+        delete flyThread;
+        flyThread = nullptr;
     }
-    delete flyThread;
 }
 
 void UfoThread::startUfo(const float x, const float y, const float height, const int speed) {
     if (flyThread != nullptr) {
-        std::cout << "Es existiert schon ein flyThread!" << '\n';
-        return;
+        if (flyThread->joinable()) {
+            flyThread->join();
+        }
+        delete flyThread;
+        flyThread = nullptr;
     }
 
     isFlying = true;
     flyThread = new std::thread(&UfoThread::runner, this, x, y, height, speed);
+
+    // kurze pause, damit der Thread starten kann, bevor der unit-test abkackt
+    std::this_thread::yield();
 }
 
 bool UfoThread::getIsFlying() const {
