@@ -1,5 +1,7 @@
 #include "ufo_thread.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 UfoThread::UfoThread(Ufo* pUfo) : ufo(pUfo) {}
 
@@ -16,9 +18,7 @@ void UfoThread::startUfo(const float x, const float y, const float height, const
         return;
     }
 
-    // ✨ Hier sofort setzen
     isFlying = true;
-
     flyThread = new std::thread(&UfoThread::runner, this, x, y, height, speed);
 }
 
@@ -28,5 +28,6 @@ bool UfoThread::getIsFlying() const {
 
 void UfoThread::runner(const float x, const float y, const float height, const int speed) {
     ufo->flyToDest(x, y, height, speed);
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));     //sleep weil bei nahen zielen unit test fehler
     isFlying = false;
 }
