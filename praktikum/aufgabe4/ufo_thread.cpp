@@ -28,6 +28,5 @@ bool UfoThread::getIsFlying() const {
 
 void UfoThread::runner(const float x, const float y, const float height, const int speed) {
     ufo->flyToDest(x, y, height, speed);
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));     //sleep weil bei nahen zielen unit test fehler
     isFlying = false;
 }
