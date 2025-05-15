@@ -3,26 +3,23 @@
 #include <functional>
 
 class Route {
-    private:
-        std::vector<std::pair<float, float>>* destinations; // Zielkoordinaten
-        float height;                                       // Flughöhe
-        std::function<float(float, float, float, float, float)> dist; // Distanzfunktion
+private:
+    std::vector<std::pair<float, float>>* destinations;
+    float height;
+    std::function<float(const float, const float, const float, const float, const float)> dist;
 
-    public:
-        Route(float pHeight, std::function<float(const float, const float, const float, const float, const float)> pDist);
-        Route(const Route& route);
-        ~Route();
+public:
+    Route(float pHeight, std::function<float(const float, const float, const float, const float, const float)> pDist);
+    Route(const Route& route);
+    ~Route();
 
+    const std::vector<std::pair<float, float>>& getDestinations() const;
+    float getHeight() const;
 
-        //---Getters---
-        const std::vector<std::pair<float, float>>& getDestinations() const;    // Zielkoordinaten getterrrr
-        float getHeight() const;        // Flughöhe getter
+    void setHeight(const float pHeight);
+    void setDist(const std::function<float(const float, const float, const float, const float, const float)> pDist);
 
-        //---Setters---
-        void setHeight(const float pHeight);        // Flughöhe setttterrrr
-        void setDist(const std::function<float(const float, const float, const float, const float, const float)> pDist);// Distanzfunktion setterr
-
-        void add(float destX, float destY);     // Zielkoordinaten hinzufügen
-        float distance() const;
-        Route shortestRoute() const; // Kürzeste Route
+    void add(const float destX, const float destY);
+    float distance() const;
+    Route shortestRoute() const;
 };
