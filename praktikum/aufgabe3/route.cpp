@@ -35,7 +35,7 @@ void Route::setDist(const std::function<float(const float, const float, const fl
 }
 
 void Route::add(const float destX, const float destY) {
-    destinations->emplace_back(destX, destY);
+    destinations->emplace_back(destX, destY);           //schneller als push_back
 }
 
 float Route::distance() const {
@@ -70,7 +70,7 @@ Route Route::shortestRoute() const {        //alle permutationen prüfen und kü
     float minDistance = distance();
 
     std::vector<std::pair<float, float>> currentOrder = *destinations;
-    std::sort(currentOrder.begin(), currentOrder.end());
+    std::sort(currentOrder.begin(), currentOrder.end());        //sort aus <algorithms> 
 
     do {
         Route temp(height, dist);
