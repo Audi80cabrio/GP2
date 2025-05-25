@@ -1,5 +1,4 @@
 #include "ufo_thread.h"
-#include <iostream>
 #include <chrono>
 #include <thread>
 

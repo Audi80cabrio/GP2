@@ -72,18 +72,16 @@ Route Route::shortestRoute() const {        //alle permutationen prüfen und kü
     std::vector<std::pair<float, float>> currentOrder = *destinations;
     std::sort(currentOrder.begin(), currentOrder.end());        //sort aus <algorithms> 
 
-    do {
+    while (std::next_permutation(currentOrder.begin(), currentOrder.end())){
         Route temp(height, dist);
-        for (const auto& p : currentOrder) {
-            temp.add(p.first, p.second);
-        }
-
+        const auto& p = currentOrder;
+        temp.destinations->assign(p.begin(), p.end());
         float d = temp.distance();
         if (d < minDistance) {
             minDistance = d;
             bestOrder = currentOrder;
         }
-    } while (std::next_permutation(currentOrder.begin(), currentOrder.end()));
+    }
 
     Route result(height, dist);
     for (const auto& p : bestOrder) {

@@ -1,5 +1,4 @@
 #include "route.h"
-#include <cmath>
 #include <algorithm>
 
 Route::Route(float pHeight, std::function<float(const float, const float, const float, const float, const float)> pDist) {
@@ -35,7 +34,7 @@ void Route::setDist(const std::function<float(const float, const float, const fl
 }
 
 void Route::add(const float destX, const float destY) {
-    destinations->emplace_back(destX, destY);
+    destinations->emplace_back(destX, destY);           //schneller als push_back
 }
 
 float Route::distance() const {
@@ -70,25 +69,20 @@ Route Route::shortestRoute() const {        //alle permutationen prüfen und kü
     float minDistance = distance();
 
     std::vector<std::pair<float, float>> currentOrder = *destinations;
-    std::sort(currentOrder.begin(), currentOrder.end());
+    std::sort(currentOrder.begin(), currentOrder.end());        //sort aus <algorithms> 
 
-    do {
+    while (std::next_permutation(currentOrder.begin(), currentOrder.end())){
         Route temp(height, dist);
-        for (const auto& p : currentOrder) {
-            temp.add(p.first, p.second);
-        }
-
+        temp.destinations->assign(currentOrder.begin(), currentOrder.end());
         float d = temp.distance();
         if (d < minDistance) {
             minDistance = d;
             bestOrder = currentOrder;
         }
-    } while (std::next_permutation(currentOrder.begin(), currentOrder.end()));
+    }
 
     Route result(height, dist);
-    for (const auto& p : bestOrder) {
-        result.add(p.first, p.second);
-    }
+    result.destinations->assign(bestOrder.begin(), bestOrder.end());
 
     return result;
 }
