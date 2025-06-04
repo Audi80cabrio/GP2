@@ -1,5 +1,4 @@
 #include "ufo_thread.h"
-#include <chrono>
 #include <thread>
 
 UfoThread::UfoThread(Ufo* pUfo) : ufo(pUfo) {}
