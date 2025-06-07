@@ -49,9 +49,11 @@ public:
     }
 
     ~MainWidget() {
+        if (uthread) uthread->stopAndJoin();  // hier ist das join welches Sie vermisst haben :)
         delete uthread;
         delete ufo;
     }
+
 
 private slots:
     void startUfo() {
@@ -61,15 +63,20 @@ private slots:
         float h = heightEdit->text().toFloat(&okH);
         int s = speedEdit->text().toInt(&okS);
 
-        if (!okX) { xEdit->setText("FEHLER"); clearLabel(); return; }
-        if (!okY) { yEdit->setText("FEHLER"); clearLabel(); return; }
-        if (!okH) { heightEdit->setText("FEHLER"); clearLabel(); return; }
-        if (!okS) { speedEdit->setText("FEHLER"); clearLabel(); return; }
+        if (!okX) { xEdit->setText("error: must be float"); clearLabel();}
+        if (!okY) { yEdit->setText("error: must be float"); clearLabel();}
+        if (!okH) { heightEdit->setText("error: must be float"); clearLabel();}
+        if (!okS) { speedEdit->setText("error: must be int"); clearLabel();}
+
+        if (!okX) {return; }
+        if (!okY) {return; }
+        if (!okH) {return; }
+        if (!okS) {return; }
 
         uthread->startUfo(x, y, h, s);
 
         std::vector<float> pos = ufo->getPosition();
-        QString text = QString("Startposition:\nX: %1\nY: %2\nH: %3")
+        QString text = QString("    Started at\n    Position:\n    X: %1 | Y: %2 | H: %3")
                             .arg(pos[0], 0, 'f', 2)
                             .arg(pos[1], 0, 'f', 2)
                             .arg(pos[2], 0, 'f', 2);
@@ -80,7 +87,7 @@ private slots:
     }
 
     void updateWindow(std::vector<float> pos) {
-        QString text = QString("Landeposition:\nX: %1\nY: %2\nH: %3")
+        QString text = QString("    Flight completed at\n    Position:\n    X: %1 | Y: %2 | H: %3")
                             .arg(pos[0], 0, 'f', 2)
                             .arg(pos[1], 0, 'f', 2)
                             .arg(pos[2], 0, 'f', 2);
