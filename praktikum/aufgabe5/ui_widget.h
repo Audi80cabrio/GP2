@@ -49,7 +49,6 @@ public:
     }
 
     ~MainWidget() {
-        if (uthread) uthread->stopAndJoin();  // hier ist das join welches Sie vermisst haben :)
         delete uthread;
         delete ufo;
     }

@@ -41,6 +41,8 @@ public:
 
         if (flyThread && flyThread->joinable()) flyThread->join();
         delete flyThread;
+        flyThread = nullptr;
+        isFlying = true;
         flyThread = new std::thread(&UfoThread::runner, this, x, y, height, speed);
     }
 

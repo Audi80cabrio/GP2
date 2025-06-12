@@ -7,14 +7,17 @@
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
+private:
+    MainWidget *mainWidget = new MainWidget(this);
+
 public:
     MainWindow(QWidget* parent = nullptr) {
-        setCentralWidget(new MainWidget(this));
+        setCentralWidget(mainWidget);
         setWindowTitle("Ufo");
         setFixedSize(250, 230);
     }
 
-    ~MainWindow() = default;
+    ~MainWindow(){delete mainWidget;};
 };
 
 #endif // UI_WINDOW_H
